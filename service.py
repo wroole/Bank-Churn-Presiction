@@ -15,6 +15,9 @@ class Client(BaseModel):
     HasCrCard:int
     IsActiveMember:int
     EstimatedSalary:float
+    SatisfactionScore:float
+    CardType:str
+    PointEarned:int
 
 @app.post("/predict")
 def predict(data: Client):

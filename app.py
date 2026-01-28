@@ -12,6 +12,9 @@ num = st.number_input("Number of Products", 1, 10, 1)
 has_card = st.selectbox("Do you have a credit card?", [0, 1])
 active = st.selectbox("Are you an active member?", [0, 1])
 salary = st.number_input("Estimated Salary", 0.0, 1e7, 60000.0)
+sat_score = st.number_input("Satisfaction Score", 0.0, 5.0, 5.0)
+card_type = st.selectbox("Card Type", ["Silver", "Gold", "Platinum", "Diamond"])
+point = st.number_input("Point Earned", 0, 1000, 500)
 
 if st.button("Predict"):
     payload = {
@@ -23,11 +26,14 @@ if st.button("Predict"):
         "NumOfProducts": num,
         "HasCrCard": has_card,
         "IsActiveMember": active,
-        "EstimatedSalary": salary
+        "EstimatedSalary": salary,
+        "SatisfactionScore": sat_score,
+        "CardType": card_type,
+        "PointEarned": point
     }
     response = requests.post("http://127.0.0.1:8000/predict", json=payload)
     result = response.json()
     if result.get("prediction") == "Leave":
-        st.warning("We are sorry to see you go.")
+        st.warning("The customer is likely to leave the bank.")
     else:
-        st.success("Congratulations! You are likely to stay with the bank.")
+        st.success("The customer is likely to stay with the bank.")
