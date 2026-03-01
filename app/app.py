@@ -31,7 +31,7 @@ if st.button("Predict"):
         "CardType": card_type,
         "PointEarned": point
     }
-    response = requests.post("http://127.0.0.1:8000/predict", json=payload)
+    response = requests.post("http://backend:8000/predict", json=payload)
     result = response.json()
     if result.get("prediction") == "Leave":
         st.warning("The customer is likely to leave the bank.")

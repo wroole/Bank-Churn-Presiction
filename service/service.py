@@ -26,3 +26,7 @@ def predict(data: Client):
     return {
         'prediction': "Leave" if churn == 1 else "Stay"
     }
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
